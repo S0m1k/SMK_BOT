@@ -1,0 +1,32 @@
+# Env
+.env
+.env.local
+
+# Sessions / state / logs (keep the placeholder, ignore everything else)
+data/*
+!data/.gitkeep
+logs/*
+!logs/.gitkeep
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+*.egg-info/
+build/
+dist/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
