@@ -30,3 +30,6 @@ dist/
 .DS_Store
 Thumbs.db
 desktop.ini
+
+# Claude working context
+CLAUDE.md

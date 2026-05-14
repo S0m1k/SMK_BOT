@@ -2,4 +2,7 @@ import asyncio
 
 from app.main import main
 
-asyncio.run(main())
+try:
+    asyncio.run(main())
+except KeyboardInterrupt:
+    pass  # graceful exit on Windows where SIGINT is delivered as KeyboardInterrupt
