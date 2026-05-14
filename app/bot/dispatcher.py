@@ -3,7 +3,7 @@ import logging
 from aiogram import Bot, Dispatcher
 from aiogram.fsm.storage.memory import MemoryStorage
 
-from app.bot.handlers import chats, errors, start, words
+from app.bot.handlers import admins, chats, errors, import_export, start, status, words
 from app.bot.handlers import settings as settings_handler
 from app.bot.middlewares.access import AccessMiddleware
 from app.config import settings
@@ -27,5 +27,8 @@ def build_bot_and_dp(userbot_client) -> tuple:
     dp.include_router(chats.router)
     dp.include_router(settings_handler.router)
     dp.include_router(words.router)
+    dp.include_router(import_export.router)
+    dp.include_router(admins.router)
+    dp.include_router(status.router)
 
     return bot, dp
