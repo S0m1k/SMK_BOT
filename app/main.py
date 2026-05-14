@@ -2,6 +2,7 @@ import asyncio
 import logging
 import signal
 
+import app.core.bus as bus
 from app.bot.lead_sender import lead_sender_loop
 from app.core.bus import reload_caches
 from app.db.base import async_session_maker, init_db
@@ -39,6 +40,10 @@ async def main() -> None:
     async with async_session_maker() as session:
         await _bootstrap(session)
         await reload_caches(session)
+        monitoring_val = await get_setting(session, "monitoring_enabled")
+        if monitoring_val == "0":
+            bus.monitoring_enabled = False
+            log.info("monitoring disabled (persisted setting)")
 
     userbot = build_client()
     # Uses saved session file; no interactive prompt in normal mode
