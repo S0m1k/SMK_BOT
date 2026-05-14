@@ -2,6 +2,7 @@ import asyncio
 import logging
 import signal
 
+from app.bot.lead_sender import lead_sender_loop
 from app.core.bus import reload_caches
 from app.db.base import async_session_maker, init_db
 from app.db.repo import get_or_create_category, get_setting, set_setting
@@ -61,6 +62,7 @@ async def main() -> None:
     tasks = [
         asyncio.create_task(userbot.run_until_disconnected(), name="userbot"),
         asyncio.create_task(dp.start_polling(bot, handle_signals=False), name="bot"),
+        asyncio.create_task(lead_sender_loop(bot), name="lead-sender"),
         asyncio.create_task(heartbeat_loop(), name="heartbeat"),
     ]
 
