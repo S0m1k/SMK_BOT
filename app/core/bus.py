@@ -11,6 +11,9 @@ log = logging.getLogger(__name__)
 
 lead_queue: asyncio.Queue[Lead] = asyncio.Queue(maxsize=1000)
 
+# Toggled by /stop and /startbot commands; not re-read from DB on every message
+monitoring_enabled: bool = True
+
 _current_matcher: KeywordMatcher | None = None
 _matcher_lock = asyncio.Lock()
 
