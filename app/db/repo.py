@@ -161,6 +161,17 @@ async def deactivate_keyword(session: AsyncSession, keyword_id: int) -> bool:
     return result.scalar_one_or_none() is not None
 
 
+async def deactivate_keyword_by_text(session: AsyncSession, text: str) -> bool:
+    result = await session.execute(
+        update(Keyword)
+        .where(Keyword.text == text, Keyword.active.is_(True))
+        .values(active=False)
+        .returning(Keyword.id)
+    )
+    await session.commit()
+    return result.scalar_one_or_none() is not None
+
+
 async def toggle_keyword_match_type(
     session: AsyncSession, keyword_id: int
 ) -> Keyword | None:
